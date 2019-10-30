@@ -1,2 +1,2 @@
 echo Running await
-sh await.sh
+sh await.sh &
