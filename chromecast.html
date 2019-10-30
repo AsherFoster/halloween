@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Chromecast</title>
+    <style>
+      .thing {
+        width: 60px;
+      }
+    </style>
+  </head>
+  <body>
+  <h1>Cast it!</h1>
+  <div class="thing">
+    <google-cast-launcher></google-cast-launcher>
+  </div>
+  <p>No button? Are you using chrome?</p>
+  <script src="https://www.gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1"></script>
+    <script>
+      (function() {
+        const appId = '5EFD3F3E';
+        window['__onGCastApiAvailable'] = function(isAvailable) {
+          if (isAvailable) {
+            initializeCastApi();
+          }
+        };
+
+        const initializeCastApi = function() {
+          cast.framework.CastContext.getInstance().setOptions({
+            receiverApplicationId: appId,
+            autoJoinPolicy: chrome.cast.AutoJoinPolicy.ORIGIN_SCOPED
+          });
+        };
+      })()
+    </script>
+  </body>
+</html>

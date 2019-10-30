@@ -113,7 +113,8 @@
   }
   async function updateGoLive() {
     await syncTime();
-    const r = await fetch('https://asherfoster.com/kv/golive');
+    // Get golive time with a cachebuster
+    const r = await fetch('https://asherfoster.com/kv/golive?' + Date.now());
     const t = JSON.parse(await r.text());
     console.log(t, timeOffset);
     liveTime = new Date(t + timeOffset);
