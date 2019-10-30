@@ -8,7 +8,7 @@ if [ -d $DEST ]; then
   rm -rf $DEST
 fi
 
-mkdir -P $DEST
+mkdir -p $DEST
 cd $DEST
 curl $AGENT_URL > agent.zip
 
