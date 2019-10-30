@@ -9,7 +9,8 @@
   const countdownEl = document.getElementById('countdown');
   const diagEl = document.getElementById('diagnostics');
   const ctx = canvas.getContext('2d', {alpha: false}); // Performance thing
-  const audioCtx = new AudioContext();
+  const beepAudio = new Audio('beep.mp3');
+  // const audioCtx = new AudioContext();
   const neons = [
     '#FF0000',
     '#00FF00',
@@ -33,18 +34,11 @@
   let timeOffset = 0;
 
   function countdownBeep(d) {
-    beep('sine', 1000, d || 300);
-  }
-  function beep(type, freq, time) {
-    // create Oscillator node
-    const oscillator = audioCtx.createOscillator();
-
-    oscillator.type = type;
-    oscillator.frequency.value = freq;
-    oscillator.connect(audioCtx.destination);
-    oscillator.start();
-
-    setTimeout(() => oscillator.stop(), time);
+    beepAudio.play();
+    setTimeout(() => {
+      beepAudio.pause();
+      beepAudio.fastSeek(0);
+    }, d | 300);
   }
   function updateCountdown() {
     const deltaMs = liveTime.getTime() - Date.now();
