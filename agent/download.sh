@@ -1,5 +1,5 @@
 AGENT_URL=https://raw.githubusercontent.com/AsherFoster/halloween/master/agent/agent.zip
-DEST=~/Destkop/halloween-agent
+DEST=~/Desktop/halloween-agent
 
 echo Installing to $DEST
 if [ -d $DEST ]; then
