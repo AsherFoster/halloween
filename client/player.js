@@ -38,7 +38,7 @@
 
   const eyeColors = ['#a29bfe', '#74b9ff', '#ff7675', '#fab1a0', '#81ecec', '#55efc4'];
   const maxDistanceFactor = 5;
-  const highlightOffsetFactor = 1/9;
+  const highlightOffsetFactor = 1/6;
   const eyeElem = document.getElementById('eye');
   const irisElem = document.getElementById('iris');
   const pupilElem = document.getElementById('pupil');
@@ -51,6 +51,7 @@
   let eyeColor = '';
   let highlightOffset = 0;
   let maxDistance = 100;
+  let shouldTryReplay = false;
   let target = {x: 0, y: 0, z: 0};
 
   window.DEBUG = debugSetting;
@@ -99,9 +100,9 @@
 
     irisElem.style.transform = `translate(${round(offsetX, 3)}px, ${round(offsetY, 3)}px)`;
 
-    pupilElem.style.transform = `translate(${round(offsetX * 1.15, 3)}px, ${round(offsetY * 1.15, 3)}px)`;
+    pupilElem.style.transform = `translate(${round(offsetX * 1.2, 3)}px, ${round(offsetY * 1.2, 3)}px)`;
 
-    highlightElem.style.transform = `translate(${round(offsetX * 1.4 + highlightOffset, 3)}px, ${round(offsetY * 1.4 - highlightOffset, 3)}px`;
+    highlightElem.style.transform = `translate(${round(offsetX * 1.6 + highlightOffset, 3)}px, ${round(offsetY * 1.6 - highlightOffset, 3)}px`;
   }
 
 
@@ -136,10 +137,20 @@
 
   layout();
 
+  document.body.onclick = () => {
+    if(shouldTryReplay) {
+      audio.play().catch(e => errors.audioFail(e, 'song'));
+    }
+  };
+
   window.addEventListener('resize', layout);
   window.countdownComplete = () => {
     console.log('Countdown complete! Playing!');
-    audio.play().catch(e => errors.audioFail(e, 'song'));
+    audio.play()
+      .catch(e => {
+        errors.audioFail(e, 'song');
+        shouldTryReplay = true;
+      });
   };
   window.onDetectorUpdate = (point) => {
     target = point;
