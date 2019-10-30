@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Halloween Master</title>
+  </head>
+  <body>
+    <button id="start">Start it all</button>
+    <div id="output">output here</div>
+    <script>
+      (function() {
+        const startButton = document.getElementById('start');
+        const output = document.getElementById('output');
+
+        startButton.onclick = async () => {
+          const start = Date.now();
+          const resp = fetch('https://asherfoster.com');
+          const srvTime = await resp.json();
+          const latency = (Date.now() - start)/2;
+          const offset = (srvTime + latency) - Date.now();
+          output.innerText = `Latency (rt/2): ${latency}ms. Srv time: ${srvTime}ms. Offset ${offset}ms`
+        }
+      })();
+    </script>
+  </body>
+</html>

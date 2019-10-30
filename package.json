@@ -1,0 +1,20 @@
+{
+  "name": "@asherfoster/halloween",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/asherfoster/halloween.git"
+  },
+  "author": "Asher Foster <me@asherfoster.com> (https://asherfoster.com/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/asherfoster/halloween/issues"
+  },
+  "homepage": "https://github.com/asherfoster/halloween#readme",
+  "dependencies": {}
+}
