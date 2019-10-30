@@ -1,8 +1,15 @@
 AGENT_URL=https://raw.githubusercontent.com/AsherFoster/halloween/master/agent/agent.zip
+DEST=~/Destkop/halloween-agent
 
-echo Installing to ~/Destkop/halloween
-mkdir -P ~/Desktop/halloween
-cd ~/Desktop/halloween
+echo Installing to $DEST
+if [ -d $DEST ]; then
+  echo Warning! $DEST already exists. Erasing in 1s
+  sleep 1
+  rm -rf $DEST
+fi
+
+mkdir -P $DEST
+cd $DEST
 curl $AGENT_URL > agent.zip
 
 unzip agent.zip
