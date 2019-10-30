@@ -43,7 +43,7 @@
   const irisElem = document.getElementById('iris');
   const pupilElem = document.getElementById('pupil');
   const highlightElem = document.getElementById('highlight');
-  const audio = new Audio('sound.mp4');
+  const audio = new Audio('sound.mp3');
 
   let height = 0;
   let width = 0;
