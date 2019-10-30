@@ -11,7 +11,7 @@ else
   echo GOLIVE is in past
 fi
 
-sh agent/execute.sh 15
+sh execute.sh 15
 
 function getOffset() {
     START=$(($(gdate +%s%N)/1000000))

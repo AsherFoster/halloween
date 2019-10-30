@@ -14,5 +14,5 @@ fi
 
 if [[ -n $1 ]]; then
   sleep $1
-  afplay client/sound.mp4
+  afplay sound.mp4
 fi
