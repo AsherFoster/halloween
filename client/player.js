@@ -141,6 +141,7 @@
 
   window.addEventListener('resize', layout);
   window.countdownComplete = () => {
+    console.log('Countdown complete! Playing!');
     audio.play();
   };
   window.onDetectorUpdate = (point) => {

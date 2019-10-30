@@ -58,7 +58,7 @@
     } else if (deltaMs < 60 * 1000) {
       countdownEl.innerText = (Math.round(deltaMs / 10) / 100).toFixed(2) + 's';
     }
-    if (deltaMs < 5 * 1000 && !beepCountdown) {
+    if (deltaMs < 5 * 1000 && !beepCountdown && !done) {
       beepCountdown = setInterval(countdownBeep, 1000);
       countdownBeep();
       intervals.push(beepCountdown);
@@ -123,9 +123,10 @@
 
   window.addEventListener('resize', layout);
   intervals.push(setInterval(changeMarkers, 500));
-  intervals.push(setInterval(updateCountdown, 0));
   intervals.push(setInterval(updateDiagnostics, 500));
   if (!isDev) updateGoLive();
   layout();
   render();
+  // We want to make sure this is called after everything, just in case it's after golive
+  setTimeout(() => intervals.push(setInterval(updateCountdown, 10)), 500);
 })();
