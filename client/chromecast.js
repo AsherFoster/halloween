@@ -2,6 +2,7 @@
 (function() {
   const context = cast.framework.CastReceiverContext.getInstance();
   context.addCustomMessageListener("urn:x-cast:com.lex.epic", onMessage);
+  context.start();
 
 
   function onMessage(msg) {
