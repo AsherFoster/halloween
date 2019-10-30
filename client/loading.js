@@ -34,10 +34,10 @@
   let timeOffset = 0;
 
   function countdownBeep(d) {
-    beepAudio.play();
+    beepAudio.play().catch(e => errors.audioFail(e, 'beep'));
     setTimeout(() => {
       beepAudio.pause();
-      beepAudio.fastSeek(0);
+      beepAudio.currentTime = 0;
     }, d | 300);
   }
   function updateCountdown() {

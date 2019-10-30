@@ -42,6 +42,7 @@
       align-items: center;
     }
     #main-text {
+      max-width: 400px;
       font-size: 2em;
       z-index: 11;
       text-align: center;
@@ -91,17 +92,17 @@
       background: white;
     }
     #iris {
-      left: 20%;
-      top: 20%;
-      height: 60%;
-      width: 60%;
+      left: 15%;
+      top: 15%;
+      height: 70%;
+      width: 70%;
       border-radius: 50%;
     }
     #pupil {
-      left: 30%;
-      top: 30%;
-      height: 40%;
-      width: 40%;
+      left: 25%;
+      top: 25%;
+      height: 50%;
+      width: 50%;
       border-radius: 50%;
       background: black;
     }
@@ -123,7 +124,7 @@
   <div id="loading">
     <canvas id="canvas"></canvas>
     <div id="diagnostics">DIAG=FALSE</div>
-    <div id="main-text">Please stand by</div>
+    <div id="main-text">Stand by for an important broadcast</div>
     <div id="bar">
       <div class="side" id="countdown">loading</div>
       <span class="flex"></span>
@@ -139,9 +140,11 @@
       <div id="highlight"></div>
     </div>
   </div>
-<!--  <iframe frameborder="0" id="video"></iframe>-->
-
-<!--  <script src="https://www.youtube.com/iframe_api" defer></script>-->
+  <script src="https://browser.sentry-cdn.com/5.7.1/bundle.min.js" integrity="sha384-KMv6bBTABABhv0NI+rVWly6PIRvdippFEgjpKyxUcpEmDWZTkDOiueL5xW+cztZZ" crossorigin="anonymous"></script>
+  <script>
+    location.search !== '?dev' && Sentry.init({ dsn: 'https://fd0641cf472642298c8e681b3a632c9a@sentry.io/1801707' });
+  </script>
+  <script type="application/javascript" src="errors.js"></script>
   <script type="application/javascript" src="face_api.js"></script>
   <script type="application/javascript" src="loading.js"></script>
   <script type="application/javascript" src="player.js"></script>

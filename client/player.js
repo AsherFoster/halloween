@@ -139,7 +139,7 @@
   window.addEventListener('resize', layout);
   window.countdownComplete = () => {
     console.log('Countdown complete! Playing!');
-    audio.play();
+    audio.play().catch(e => errors.audioFail(e, 'song'));
   };
   window.onDetectorUpdate = (point) => {
     target = point;
