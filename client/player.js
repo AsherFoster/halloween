@@ -38,7 +38,7 @@
 
   const eyeColors = ['#a29bfe', '#74b9ff', '#ff7675', '#fab1a0', '#81ecec', '#55efc4'];
   const maxDistanceFactor = 5;
-  const highlightOffsetFactor = 1/10;
+  const highlightOffsetFactor = 1/9;
   const eyeElem = document.getElementById('eye');
   const irisElem = document.getElementById('iris');
   const pupilElem = document.getElementById('pupil');
@@ -97,14 +97,11 @@
     let offsetX = deltaX * ratioX;
     let offsetY = deltaY * ratioY;
 
-    irisElem.style.left = round(eyeSize/2 + offsetX - irisElem.offsetWidth/2, 3) + 'px';
-    irisElem.style.top = round(eyeSize/2 + offsetY - irisElem.offsetHeight/2, 3) + 'px';
+    irisElem.style.transform = `translate(${round(offsetX, 3)}px, ${round(offsetY, 3)}px)`;
 
-    pupilElem.style.left = round(eyeSize/2 + (offsetX * 1.15) - pupilElem.offsetWidth/2, 3) + 'px';
-    pupilElem.style.top = round(eyeSize/2 + (offsetY * 1.15) - pupilElem.offsetHeight/2, 3) + 'px';
+    pupilElem.style.transform = `translate(${round(offsetX * 1.15, 3)}px, ${round(offsetY * 1.15, 3)}px)`;
 
-    highlightElem.style.left = round(eyeSize/2 + (offsetX * 1.2) + highlightOffset - highlightElem.offsetWidth/2, 3) + 'px';
-    highlightElem.style.top = round(eyeSize/2 + (offsetY * 1.2) - highlightOffset - highlightElem.offsetHeight/2, 3) + 'px';
+    highlightElem.style.transform = `translate(${round(offsetX * 1.4 + highlightOffset, 3)}px, ${round(offsetY * 1.4 - highlightOffset, 3)}px`;
   }
 
 
