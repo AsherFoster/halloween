@@ -14,8 +14,8 @@
 
         startButton.onclick = async () => {
           const start = Date.now();
-          const resp = fetch('https://asherfoster.com');
-          const srvTime = await resp.json();
+          const resp = await fetch('https://asherfoster.com/time');
+          const srvTime = JSON.parse(await resp.text());
           const latency = (Date.now() - start)/2;
           const offset = (srvTime + latency) - Date.now();
           output.innerText = `Latency (rt/2): ${latency}ms. Srv time: ${srvTime}ms. Offset ${offset}ms`

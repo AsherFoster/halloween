@@ -1,6 +1,7 @@
 // This IIFE handles the loading screen. Calls window.countdownComplete after a bit, and hides itself
 (function () {
-  const liveTime = new Date(Date.now() + 15 * 1000);
+  const isDev = window.location.search === '?dev';
+  let liveTime = new Date(Date.now() + (isDev ? 15 : 120) * 1000); // Will be overwritten
   const pixelSize = 2;
 
   const loadingWrapper = document.getElementById('loading');
@@ -29,6 +30,7 @@
   let diagnostics = {
     LIVE_TIME: liveTime
   };
+  let timeOffset = 0;
 
   function countdownBeep(d) {
     beep('sine', 1000, d || 300);
@@ -102,11 +104,28 @@
     drawMarkers();
     if (!done) requestAnimationFrame(render);
   }
+  async function syncTime() {
+    const start = Date.now();
+    const resp = await fetch('https://asherfoster.com/time');
+    const srvTime = JSON.parse(await resp.text());
+    const latency = (Date.now() - start)/2;
+    return (srvTime + latency) - Date.now();
+  }
+  async function updateGoLive() {
+    await syncTime();
+    const r = await fetch('https://asherfoster.com/kv/golive');
+    const t = JSON.parse(await r.text());
+    console.log(t, timeOffset);
+    liveTime = new Date(t + timeOffset);
+    DEBUG.LIVE_TIME = liveTime;
+    updateDiagnostics();
+  }
 
   window.addEventListener('resize', layout);
   intervals.push(setInterval(changeMarkers, 500));
   intervals.push(setInterval(updateCountdown, 0));
   intervals.push(setInterval(updateDiagnostics, 500));
+  if (!isDev) updateGoLive();
   layout();
   render();
 })();
