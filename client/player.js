@@ -78,17 +78,10 @@
   }
 
   function updateEye() {
-    /*  Set .eye size */
-    /*  Set iris color */
-    /*  Set iris, pupil pos */
-    // console.log(target);
-
     let eyeX = width/2;
     let eyeY = height/2;
     let deltaX = clamp(target.x - eyeX, -maxDistance, maxDistance);
     let deltaY = clamp(target.y - eyeY, -maxDistance, maxDistance);
-
-    console.log(deltaX, deltaY);
 
     let distX = pythagoras(deltaX, target.z);
     let distY = pythagoras(deltaY, target.z);

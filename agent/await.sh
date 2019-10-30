@@ -1,5 +1,5 @@
 GOLIVE_MS=$(curl https://asherfoster.com/kv/golive)
-GOLIVE=$((GOLIVE_MS/1000))
+GOLIVE=$((GOLIVE_MS/1000 - 15)) # Open 30s before golive
 DELAY=$((GOLIVE - $(date +'%s')))
 
 echo "GOLIVE is at $(date -r $GOLIVE) in ${DELAY}"
@@ -10,4 +10,4 @@ else
   echo GOLIVE is in past
 fi
 
-sh $(dirname $(realpath $0))/execute.sh
+sh agent/execute.sh 15
