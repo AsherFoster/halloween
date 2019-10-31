@@ -38,7 +38,7 @@
     setTimeout(() => {
       beepAudio.pause();
       beepAudio.currentTime = 0;
-    }, d | 300);
+    }, d | 200);
   }
   function updateCountdown() {
     const deltaMs = liveTime.getTime() - Date.now();
@@ -104,13 +104,16 @@
     const srvTime = JSON.parse(await resp.text());
     const latency = (Date.now() - start)/2;
     timeOffset = (srvTime + latency) - Date.now();
+    // If local clock is behind, this should be positive
+    // If local clock is ahead, this is negative
+    // This value should be added to the local time
+    // Or subtracted from remote time
   }
   async function updateGoLive() {
     await syncTime();
     // Get golive time with a cachebuster
     const r = await fetch('https://asherfoster.com/kv/golive?' + Date.now());
     const t = JSON.parse(await r.text());
-    console.log(t, timeOffset);
     liveTime = new Date(t - timeOffset);
     DEBUG.LIVE_TIME = liveTime;
     updateDiagnostics();

@@ -23,7 +23,7 @@
     console.log('Player ready', ready);
     if (muted) player.setVolume(0);
     player.playVideo();
-    if (!ready) {
+    if (!ready) { // Make it pause once it's buffered a little if we aren't playing
       setTimeout(() => {
         player.pauseVideo();
         player.seekTo(1, true);
