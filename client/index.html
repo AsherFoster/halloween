@@ -69,6 +69,7 @@
     }
 
     #video {
+      position: absolute;
       width: 100vw;
       height: 100vh;
     }
@@ -132,17 +133,17 @@
       <div class="side"></div>
     </div>
   </div>
-<!--  <div id="eye-wrapper">-->
-<!--    <div id="logs"></div>-->
-<!--    <div id="eye">-->
-<!--      <div id="white"></div>-->
-<!--      <div id="iris"></div>-->
-<!--      <div id="pupil"></div>-->
-<!--      <div id="highlight"></div>-->
-<!--    </div>-->
-<!--  </div>-->
+  <iframe frameborder="0" id="video"></iframe>
+  <div id="eye-wrapper">
+    <div id="logs"></div>
+    <div id="eye">
+      <div id="white"></div>
+      <div id="iris"></div>
+      <div id="pupil"></div>
+      <div id="highlight"></div>
+    </div>
+  </div>
 
-    <iframe frameborder="0" id="video"></iframe>
 
     <script src="https://www.youtube.com/iframe_api" defer></script>
   <script src="https://browser.sentry-cdn.com/5.7.1/bundle.min.js" integrity="sha384-KMv6bBTABABhv0NI+rVWly6PIRvdippFEgjpKyxUcpEmDWZTkDOiueL5xW+cztZZ" crossorigin="anonymous"></script>

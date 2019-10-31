@@ -1,4 +1,5 @@
 (function () {
+  window.DEBUG_INFO = {};
   window.onDetectorUpdate = window.onDetectorUpdate || (() => {});
 
 
