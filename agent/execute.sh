@@ -1,4 +1,4 @@
-URL=https://asherfoster.com/halloween/client/index.html
+URL="https://asherfoster.com/halloween/client/index.html?muted"
 
 osascript -e "set Volume 10"
 

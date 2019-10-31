@@ -1,5 +1,6 @@
 // This IIFE handles the loading screen. Calls window.countdownComplete after a bit, and hides itself
 (function () {
+  let DEBUG = window.DEBUG || {};
   const isDev = window.location.search === '?dev';
   let liveTime = new Date(Date.now() + (isDev ? 15 : 120) * 1000); // Will be overwritten
   const pixelSize = 2;
@@ -47,7 +48,7 @@
       intervals.forEach(i => clearInterval(i));
       done = true;
       loadingWrapper.style.display = 'none';
-      // countdownComplete();
+      countdownComplete();
     } else if (deltaMs < 60 * 1000) {
       countdownEl.innerText = (Math.round(deltaMs / 10) / 100).toFixed(2) + 's';
     }

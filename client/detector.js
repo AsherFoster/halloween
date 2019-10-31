@@ -1,5 +1,4 @@
 (function () {
-  window.DEBUG_INFO = {};
   window.onDetectorUpdate = window.onDetectorUpdate || (() => {});
 
 
@@ -20,7 +19,7 @@
 
   // Detector
   const streamElement = document.getElementById('stream');
-  const detector = new faceapi.TinyFaceDetectorOptions({size: 416});
+  const detector = CONTROL_MODE !== 'random' && new faceapi.TinyFaceDetectorOptions({size: 416});
   let stream;
   let detectionTime = 0;
 
