@@ -17,6 +17,7 @@
         onReady: onPlayerReady,
       }
     });
+    window.player = player;
   };
 
   function onPlayerReady() {
