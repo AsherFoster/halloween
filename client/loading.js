@@ -103,7 +103,7 @@
     const resp = await fetch('https://asherfoster.com/time');
     const srvTime = JSON.parse(await resp.text());
     const latency = (Date.now() - start)/2;
-    return (srvTime + latency) - Date.now();
+    timeOffset = (srvTime + latency) - Date.now();
   }
   async function updateGoLive() {
     await syncTime();
@@ -111,7 +111,7 @@
     const r = await fetch('https://asherfoster.com/kv/golive?' + Date.now());
     const t = JSON.parse(await r.text());
     console.log(t, timeOffset);
-    liveTime = new Date(t + timeOffset);
+    liveTime = new Date(t - timeOffset);
     DEBUG.LIVE_TIME = liveTime;
     updateDiagnostics();
   }

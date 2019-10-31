@@ -5,20 +5,45 @@
     <title>Halloween Master</title>
   </head>
   <body>
+    <h1 id="countdown">Time remaining</h1>
     <button id="start">Start it all</button>
     <div id="output">output here</div>
     <script>
       (function() {
         const startButton = document.getElementById('start');
         const output = document.getElementById('output');
+        const countdown = document.getElementById('countdown');
 
-        startButton.onclick = async () => {
+        let timeOffset = 0;
+        let liveTime = new Date(Date.now() + 15 * 1000);
+
+        async function syncTime() {
           const start = Date.now();
           const resp = await fetch('https://asherfoster.com/time');
           const srvTime = JSON.parse(await resp.text());
           const latency = (Date.now() - start)/2;
-          const offset = (srvTime + latency) - Date.now();
-          output.innerText = `Latency (rt/2): ${latency}ms. Srv time: ${srvTime}ms. Offset ${offset}ms`
+          timeOffset = (srvTime + latency) - Date.now();
+        }
+
+        async function updateCountdown() {
+          countdown.innerText = '' + Math.round((liveTime.getTime() - Date.now()) / 100) / 10;
+        }
+
+        async function updateGoLive() {
+          await syncTime();
+          // Get golive time with a cachebuster
+          const r = await fetch('https://asherfoster.com/kv/golive?' + Date.now());
+          const t = JSON.parse(await r.text());
+          liveTime = new Date(t + timeOffset);
+        }
+
+        updateGoLive();
+
+        setInterval(() => updateCountdown(), 100);
+
+        startButton.onclick = async () => {
+          await syncTime();
+          output.innerText = `Offset ${timeOffset}ms`
         }
       })();
     </script>
