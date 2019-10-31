@@ -1,5 +1,5 @@
 (function () {
-  location.hotname === 'localhost' ||
+  location.hostname === 'localhost' ||
   location.search === '?dev' ||
   Sentry.init({ dsn: 'https://fd0641cf472642298c8e681b3a632c9a@sentry.io/1801707' });
   
