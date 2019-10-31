@@ -44,6 +44,7 @@
   const pupilElem = document.getElementById('pupil');
   const highlightElem = document.getElementById('highlight');
   const audio = new Audio('sound.mp3');
+  let shouldPlay = false;
 
   let height = 0;
   let width = 0;
@@ -127,23 +128,26 @@
       ctx.fillText(l.trim(), 10, 400 + (i + 1) * 20)
     })
   }
+  async function playAudio() {
+    if (shouldPlay)
+      return await audio.play();
+    else shouldPlay = true
+  }
 
   layout();
 
   document.body.onclick = () => {
     if(shouldTryReplay) {
-      audio.play().catch(e => errors.audioFail(e, 'song'));
+      playAudio();
     }
   };
+
+  audio.oncanplay = () => playAudio();
 
   window.addEventListener('resize', layout);
   window.countdownComplete = () => {
     console.log('Countdown complete! Playing!');
-    audio.play()
-      .catch(e => {
-        errors.audioFail(e, 'song');
-        shouldTryReplay = true;
-      });
+    playAudio().catch(() => shouldTryReplay = true);
   };
   window.onDetectorUpdate = (point) => {
     target = point;
