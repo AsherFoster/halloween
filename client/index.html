@@ -68,10 +68,10 @@
       word-wrap: break-word;
     }
 
-    /*#video {*/
-    /*  width: 100vw;*/
-    /*  height: 100vh;*/
-    /*}*/
+    #video {
+      width: 100vw;
+      height: 100vh;
+    }
     #eye-wrapper {
       width: 100vw;
       height: 100vh;
@@ -132,15 +132,19 @@
       <div class="side"></div>
     </div>
   </div>
-  <div id="eye-wrapper">
-    <div id="logs"></div>
-    <div id="eye">
-      <div id="white"></div>
-      <div id="iris"></div>
-      <div id="pupil"></div>
-      <div id="highlight"></div>
-    </div>
-  </div>
+<!--  <div id="eye-wrapper">-->
+<!--    <div id="logs"></div>-->
+<!--    <div id="eye">-->
+<!--      <div id="white"></div>-->
+<!--      <div id="iris"></div>-->
+<!--      <div id="pupil"></div>-->
+<!--      <div id="highlight"></div>-->
+<!--    </div>-->
+<!--  </div>-->
+
+    <iframe frameborder="0" id="video"></iframe>
+
+    <script src="https://www.youtube.com/iframe_api" defer></script>
   <script src="https://browser.sentry-cdn.com/5.7.1/bundle.min.js" integrity="sha384-KMv6bBTABABhv0NI+rVWly6PIRvdippFEgjpKyxUcpEmDWZTkDOiueL5xW+cztZZ" crossorigin="anonymous"></script>
   <script>
     location.search !== '?dev' && Sentry.init({ dsn: 'https://fd0641cf472642298c8e681b3a632c9a@sentry.io/1801707' });

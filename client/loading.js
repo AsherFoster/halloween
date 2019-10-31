@@ -47,7 +47,7 @@
       intervals.forEach(i => clearInterval(i));
       done = true;
       loadingWrapper.style.display = 'none';
-      countdownComplete();
+      // countdownComplete();
     } else if (deltaMs < 60 * 1000) {
       countdownEl.innerText = (Math.round(deltaMs / 10) / 100).toFixed(2) + 's';
     }
