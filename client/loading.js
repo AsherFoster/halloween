@@ -11,7 +11,7 @@
   const countdownEl = document.getElementById('countdown');
   const diagEl = document.getElementById('diagnostics');
   const ctx = canvas.getContext('2d', {alpha: false}); // Performance thing
-  const beepAudio = new Audio('beep.mp3');
+  // const beepAudio = new Audio('beep.mp3');
   const neons = [
     '#FF0000',
     '#00FF00',
@@ -35,17 +35,17 @@
   let timeOffset = 0;
 
   function countdownBeep(d) {
-    beepAudio.play().catch(e => errors.audioFail(e, 'beep'));
-    setTimeout(() => {
-      beepAudio.pause();
-      beepAudio.currentTime = 0;
-    }, d | 200);
+    // beepAudio.play().catch(e => errors.audioFail(e, 'beep'));
+    // setTimeout(() => {
+    //   beepAudio.pause();
+    //   beepAudio.currentTime = 0;
+    // }, d | 200);
   }
   window.hideLoadingScreen = () => {
     intervals.forEach(i => clearInterval(i));
     done = true;
     loadingWrapper.style.display = 'none';
-  }
+  };
   function updateCountdown() {
     const deltaMs = liveTime.getTime() - Date.now();
     diagnostics.DELTA = deltaMs;
