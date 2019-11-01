@@ -3,7 +3,7 @@
   let DEBUG = window.DEBUG || {};
   const isDev = window.location.search === '?dev';
   let liveTime = new Date(Date.now() + (isDev ? 15 : 120) * 1000); // Will be overwritten
-  const pixelSize = 2;
+  const pixelSize = 4;
 
   const loadingWrapper = document.getElementById('loading');
   const canvas = document.getElementById('canvas');
