@@ -2,7 +2,8 @@
 (function () {
   let DEBUG = window.DEBUG || {};
   const isDev = window.location.search === '?dev';
-  let liveTime = new Date(Date.now() + (isDev ? 15 : 120) * 1000); // Will be overwritten
+  // let liveTime = new Date(Date.now() + (isDev ? 15 : 120) * 1000); // Will be overwritten
+  let liveTime = new Date(Date.now() + 30 * 1000); // Will be overwritten
   const pixelSize = 4;
 
   const loadingWrapper = document.getElementById('loading');
@@ -40,15 +41,19 @@
       beepAudio.currentTime = 0;
     }, d | 200);
   }
+  window.hideLoadingScreen = () => {
+    intervals.forEach(i => clearInterval(i));
+    done = true;
+    loadingWrapper.style.display = 'none';
+  }
   function updateCountdown() {
     const deltaMs = liveTime.getTime() - Date.now();
     diagnostics.DELTA = deltaMs;
     if (deltaMs < 0) {
       countdownEl.innerText = 'now';
-      intervals.forEach(i => clearInterval(i));
       done = true;
-      loadingWrapper.style.display = 'none';
-      countdownComplete();
+      intervals.forEach(i => clearInterval(i));
+      // countdownComplete();
     } else if (deltaMs < 60 * 1000) {
       countdownEl.innerText = (Math.round(deltaMs / 10) / 100).toFixed(2) + 's';
     }
@@ -122,7 +127,7 @@
   window.addEventListener('resize', layout);
   intervals.push(setInterval(changeMarkers, 500));
   intervals.push(setInterval(updateDiagnostics, 500));
-  if (!isDev) updateGoLive();
+  // if (!isDev) updateGoLive();
   layout();
   render();
   // We want to make sure this is called after everything, just in case it's after golive
