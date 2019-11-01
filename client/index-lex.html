@@ -1,0 +1,69 @@
+<html>
+	<head>
+		<link rel="stylesheet" href="https://use.typekit.net/ozx1ggk.css">
+		<script type="text/javascript" src="https://www.gstatic.com/cast/sdk/libs/caf_receiver/v3/cast_receiver_framework.js"></script>
+		<script src="https://www.youtube.com/iframe_api"></script>
+		<script>
+			const context = cast.framework.CastReceiverContext.getInstance();
+			context.addCustomMessageListener("urn:x-cast:com.lex.epic", onMessage);
+			context.start();
+			
+			function onYouTubeIframeAPIReady() {
+				player = new YT.Player('youtubePlayer', {
+					height: '100%',
+					width: '100%',
+					videoId: "",
+					events: {
+						onReady: () => isReady()
+					},
+				});
+			}
+			
+			function stopYoutubePlayer() {
+				
+			}
+			
+			function isReady() {
+				
+			}
+			
+			function onMessage(msg) {
+				if(msg.data.c === "kill") {
+					context.stop();
+				}
+				if(msg.data.c === "play") {
+					if(player !== null)
+						player.playVideo();
+				}
+				if(msg.data.c === "pause") {
+					if(player !== null)
+						player.pauseVideo();
+				}
+				if(msg.data.c === "loadv") {
+					player.loadVideoById(msg.data.id, 0);
+					player.pauseVideo();
+				}
+				if(msg.data.c === "seek") {
+					if(player !== null)
+						player.seekTo(msg.data.time)
+				}
+			}
+		</script>
+		
+		<style>
+			body {
+				background-repeat: no-repeat;
+				background-size: contain;
+				background-position: center;
+				background-color: black;
+			}
+		</style>
+		
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<title></title>
+	</head>
+	
+	<body>
+		<div id="youtubePlayer"></div>
+	</body>
+</html>
