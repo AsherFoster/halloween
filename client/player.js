@@ -23,7 +23,6 @@
     });
     window.player = player;
   };
-  onYouTubeIframeAPIReady();
 
   function onPlayerReady() {
     console.log('Player ready', ready);
