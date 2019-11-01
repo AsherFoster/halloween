@@ -53,7 +53,8 @@
       countdownEl.innerText = 'now';
       done = true;
       intervals.forEach(i => clearInterval(i));
-      // countdownComplete();
+      loadingWrapper.style.display = 'none';
+      countdownComplete();
     } else if (deltaMs < 60 * 1000) {
       countdownEl.innerText = (Math.round(deltaMs / 10) / 100).toFixed(2) + 's';
     }
@@ -127,7 +128,7 @@
   window.addEventListener('resize', layout);
   intervals.push(setInterval(changeMarkers, 500));
   intervals.push(setInterval(updateDiagnostics, 500));
-  // if (!isDev) updateGoLive();
+  if (!isDev) updateGoLive();
   layout();
   render();
   // We want to make sure this is called after everything, just in case it's after golive

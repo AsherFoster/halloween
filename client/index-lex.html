@@ -1,0 +1,145 @@
+<html>
+	<head>
+		<link rel="stylesheet" href="https://use.typekit.net/ozx1ggk.css">
+		<script type="text/javascript" src="https://www.gstatic.com/cast/sdk/libs/caf_receiver/v3/cast_receiver_framework.js"></script>
+		<script src="https://www.youtube.com/iframe_api"></script>
+		<script>
+			const context = cast.framework.CastReceiverContext.getInstance();
+			context.addCustomMessageListener("urn:x-cast:com.lex.epic", onMessage);
+			context.start();
+			
+			function onYouTubeIframeAPIReady() {
+				player = new YT.Player('youtubePlayer', {
+					height: '100%',
+					width: '100%',
+					videoId: "",
+					events: {
+						onReady: () => isReady()
+					},
+				});
+			}
+			
+			function stopYoutubePlayer() {
+				
+			}
+			
+			function isReady() {
+				
+			}
+			
+			function onMessage(msg) {
+				if(msg.data.c === "kill") {
+					context.stop();
+				}
+				if(msg.data.c === "play") {
+					if(player !== null) {
+						player.playVideo();
+						hideLoadingScreen();
+					}
+				}
+				if(msg.data.c === "pause") {
+					if(player !== null)
+						player.pauseVideo();
+				}
+				if(msg.data.c === "loadv") {
+					player.loadVideoById(msg.data.id, 0);
+					player.pauseVideo();
+				}
+				if(msg.data.c === "seek") {
+					if(player !== null)
+						player.seekTo(msg.data.time)
+				}
+			}
+		</script>
+		
+		<style>
+			body {
+				background-repeat: no-repeat;
+				background-size: contain;
+				background-position: center;
+				background-color: black;
+			}
+			html, body {
+				margin: 0;
+				font-family: 'Roboto Mono', monospace;
+				background: black;
+			}
+			.flex {
+				flex: 1;
+			}
+
+			#loading {
+				position: fixed;
+				z-index: 10;
+				top: 0;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				width: 100vw;
+				height: 100vh;
+				background: #000;
+				color: #FFF;
+			}
+			#canvas {
+				position: absolute;
+				top: 0;
+				display: block;
+				width: 100vw;
+				height: 100vh;
+				opacity: 0.7;
+			}
+			#bar {
+				position: absolute;
+				width: 100%;
+				bottom: 1em;
+				display: flex;
+				font-size: 2em;
+				align-items: center;
+			}
+			#main-text {
+				max-width: 400px;
+				font-size: 2em;
+				z-index: 11;
+				text-align: center;
+				padding: 0.6em 3em;
+				background: #000;
+			}
+			.side {
+				min-width: 4em;
+				padding: 0.2em 1em;
+				margin: 1em;
+				text-align: center;
+			}
+			#countdown {
+				background: #000;
+			}
+			#diagnostics {
+				position: absolute;
+				top: 0;
+				right: 0;
+				max-width: 200px;
+				background: #000;
+				color: #FFF;
+				word-wrap: break-word;
+			}
+		</style>
+		
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<title></title>
+	</head>
+	
+	<body>
+		<div id="loading">
+			<canvas id="canvas"></canvas>
+			<div id="diagnostics">DIAG=FALSE</div>
+			<div id="main-text">Stand by for an important broadcast</div>
+			<div id="bar">
+				<div class="side" id="countdown">loading</div>
+				<span class="flex"></span>
+				<div class="side"></div>
+			</div>
+		</div>
+		<div id="youtubePlayer"></div>
+		<script src="loading.js"></script>
+	</body>
+</html>
