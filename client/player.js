@@ -15,7 +15,9 @@
     // player.seekTo = (n) => player.setCurrentTime(n);
     // onPlayerReady();
     player = new YT.Player('video', {
-      videoId: 'dQw4w9WgXcQ', // Take a guess
+      videoId: '', // Take a guess
+      height: '100%',
+      width: '100%',
       events: {
         onReady: onPlayerReady,
       },
@@ -28,6 +30,8 @@
 
   function onPlayerReady() {
     console.log('Player ready', ready);
+
+    player.loadVideoById('dQw4w9WgXcQ', 0);
     if (muted) player.setVolume(0);
     if (!ready) { // Make it pause once it's buffered a little if we aren't playing
       // player.playVideo().then(() => {
