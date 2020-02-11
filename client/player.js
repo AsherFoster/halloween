@@ -33,7 +33,7 @@
     // player.seekTo = (n) => player.setCurrentTime(n);
     // onPlayerReady();
     player = new YT.Player('video', {
-      videoId: 'hRf8oUD68vs', // Take a guess
+      videoId: 'dQw4w9WgXcQ', // Take a guess
       height: '100%',
       width: '100%',
       events: {

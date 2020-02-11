@@ -1,7 +1,7 @@
 // This IIFE handles the loading screen. Calls window.countdownComplete after a bit, and hides itself
 (function () {
   let DEBUG = window.DEBUG || {};
-  const isDev = window.location.search === '?dev';
+  const isDev = true || window.location.search === '?dev';
   // let liveTime = new Date(Date.now() + (isDev ? 15 : 120) * 1000); // Will be overwritten
   let liveTime = new Date(Date.now() + 15 * 1000); // Will be overwritten
   const pixelSize = 4;
